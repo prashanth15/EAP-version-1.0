@@ -1,0 +1,383 @@
+/*----------------- Reset CSS Document -----------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+img{
+    width: 100%;
+    outline:none;
+    border:0;
+}
+
+/*----------------- Importing Fonts -----------------*/
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('../fonts/SegoeUI-Light.eot');
+	src: url('../fonts/SegoeUI-Light.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/SegoeUI-Light.woff2') format('woff2'),
+	url('../fonts/SegoeUI-Light.woff') format('woff'),
+	url('../fonts/SegoeUI-Light.ttf') format('truetype'),
+	url('../fonts/SegoeUI-Light.svg#SegoeUI-Light') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('../fonts/SegoeUI-Bold.eot');
+	src: url('../fonts/SegoeUI-Bold.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/SegoeUI-Bold.woff2') format('woff2'),
+	url('../fonts/SegoeUI-Bold.woff') format('woff'),
+	url('../fonts/SegoeUI-Bold.ttf') format('truetype'),
+	url('../fonts/SegoeUI-Bold.svg#SegoeUI-Bold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('../fonts/SegoeUI-Semibold.eot');
+	src: url('../fonts/SegoeUI-Semibold.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/SegoeUI-Semibold.woff2') format('woff2'),
+	url('../fonts/SegoeUI-Semibold.woff') format('woff'),
+	url('../fonts/SegoeUI-Semibold.ttf') format('truetype'),
+	url('../fonts/SegoeUI-Semibold.svg#SegoeUI-Semibold') format('svg');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('../fonts/SegoeUI.eot');
+	src: url('../fonts/SegoeUI.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/SegoeUI.woff2') format('woff2'),
+	url('../fonts/SegoeUI.woff') format('woff'),
+	url('../fonts/SegoeUI.ttf') format('truetype'),
+	url('../fonts/SegoeUI.svg#SegoeUI') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*----------------- General Styles -----------------*/
+html,body {
+    height:100%!important;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    -webkit-text-stroke: 1px transparent;
+    font-style: 13px;
+}
+
+img{
+    width:100%;
+    outline: none;
+    border: none;
+    display: block;
+}
+
+hr{
+    width: 100%;
+    height: 1px;
+    margin: 12px 0;
+    background: rgba($black, .1);
+    border: 0;
+    outline: none;
+    float: left;
+}
+
+p{
+    padding-bottom: 16px;
+}
+
+h1{font-size: 112px;}
+h2{font-size: 56px;}
+h3{font-size: 44px;}
+h4{font-size: 32px;}
+h5{font-size: 24px;}
+h6{font-size:20px;}
+.h7{font-size: 16px;}
+.h8{font-size: 14px;}
+.h9{font-size: 12px;}
+.h10{font-size: 10px;}
+
+
+.no-padding{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.no-margin{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+p{
+    font-size: 13px;
+    line-height: 21px;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.margin-bottom48{margin-bottom: 48px;}
+.margin-bottom32{margin-bottom: 32px;}
+.margin-bottom28{margin-bottom: 28px;}
+.margin-bottom24{margin-bottom: 24px;}
+.margin-bottom20{margin-bottom: 20px;}
+.margin-bottom16{margin-bottom: 16px;}
+.margin-bottom12{margin-bottom: 12px;}
+
+.margin-top48{margin-top: 48px;}
+.margin-top32{margin-top: 32px;}
+.margin-top28{margin-top: 28px;}
+.margin-top24{margin-top: 24px;}
+.margin-top20{margin-top: 20px;}
+.margin-top16{margin-top: 16px;}
+.margin-top12{margin-top: 12px;}
+
+.primary-color{
+	background: #00baff;
+}
+
+.secondary-color{
+	background: #f5f5f5;
+}
+
+.pull-left{float:left;}
+.pull-right{float:right;}
+
+/*----------------- Dashboard Styles -----------------*/
+.wrapper{
+  max-width: 1280px;
+	margin: 0 auto;
+	background: #fff;
+}
+
+.padding-gen{
+	padding: 0 20px;
+}
+
+.panel-title{
+	padding: 20px 0;
+	background: #bac8c9;
+	font-size: 21px;
+	line-height: 24px;
+	font-weight:normal;
+	color: #fff;
+}
+
+
+/*----------------- Header Styles -----------------*/
+
+header{
+	height: 60px;
+  	background: #14b3ff;
+	overflow: hidden;
+}
+
+header .logo{
+	width: 150px;
+	padding-top: 11px;
+	float: left;
+}
+
+header .panel-user{
+	width: auto;
+	height: auto;
+	padding-top: 18px;
+}
+
+header .panel-user .user-icon{
+	width: 17px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+header .panel-user .user-name{
+	max-width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: inline-block;
+	margin-right: 20px;
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: .08em;
+	color: #fff;
+	opacity: .8;
+}
+
+header .panel-user .user-role{
+	width: auto;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+header .panel-user .user-role a{
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #fff;
+	letter-spacing: .08em;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+header .panel-user .logout{
+	width: auto;
+	display: inline-block;
+}
+
+header .panel-user .button-txt{
+	width: auto;
+	background: #14b3ff;
+	padding: 0 10px;
+	font-size: 9px;
+	text-transform: uppercase;
+	letter-spacing: .08em;
+	color: #fff;
+	border: 0;
+	outline: none;
+	opacity: .8;
+}
+
+
+/*----------------- Main Content Styles -----------------*/
+.content{
+	overflow: hidden;
+	padding: 10px 10px;
+}
+
+.row{
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
+.w50{
+	width: 50%;
+	padding: 0 20px;
+	box-sizing: border-box;
+	float: left;
+}
+
+.w30{
+	width: 30%;
+	padding: 0 20px;
+	box-sizing: border-box;
+	float: left;
+}
+
+.w20{
+	width: 20%;
+	padding: 0 10px;
+	box-sizing: border-box;
+	float: left;
+}
+
+/*----------------- Footer Styles -----------------*/
+
+footer{
+	padding: 20px 0;
+	text-align: center;
+	background: #bac8c9;
+	font-size: 12px;
+	color: #fff;
+}
+
+.sub-title{
+	font-size: 24px;
+	color: #8e8e8e;
+	font-weight: 300;
+	text-align: center;
+}
+
+	 /* Style The Dropdown Button */
+.dropbtn {
+	background-color: #14b3ff;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+	background-color: #f1f1f1
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+	background-color: #0f5783;
+}

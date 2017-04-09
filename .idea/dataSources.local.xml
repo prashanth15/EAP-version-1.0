@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - bitnami_openproject@localhost" uuid="99b33e69-30da-4184-8ad7-a7d6d15e94ed">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>bitnami_openproject.*</schema-pattern>
+      <default-schemas>bitnami_openproject.*</default-schemas>
+    </data-source>
+    <data-source name="MySQL - sonar@localhost" uuid="3edb1ec7-b566-4883-a5fc-68d1c57856a8">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>sonar.*</schema-pattern>
+      <default-schemas>sonar.*</default-schemas>
+    </data-source>
+    <data-source name="MySQL - duplicate_time_clock@localhost" uuid="a9cd8bd6-c4df-4507-96d6-12baf672d73d">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>duplicate_time_clock.*</schema-pattern>
+      <default-schemas>duplicate_time_clock.*</default-schemas>
+    </data-source>
+    <data-source name="MySQL - epa@localhost" uuid="ab1fb5fc-4efc-4291-a34c-73495ab4a385">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>epa.*</schema-pattern>
+      <default-schemas>epa.*</default-schemas>
+    </data-source>
+  </component>
+</project>

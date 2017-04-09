@@ -1,0 +1,288 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:beans="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <context:component-scan base-package="com.app"/>
+
+    <context:property-placeholder location="WEB-INF/ad.properties"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--database connection for openproject-->
+
+    <bean id="OpenProject" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/bitnami_openproject"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="hibernate4_openproject"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="OpenProject"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.app.model.openProject.UsersOpenProject</value>
+                <value>com.app.model.openProject.WorkPackages</value>
+                <value>com.app.model.openProject.TimeEntries</value>
+                <value>com.app.model.openProject.Projects</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="UserOpenProjectDAO" class="com.app.dao.openProject.UserOpenProjectDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_openproject"/>
+    </bean>
+
+    <bean id="WorkPackagesDAO" class="com.app.dao.openProject.WorkPackagesDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_openproject"/>
+    </bean>
+
+    <bean id="ProjectsDAO" class="com.app.dao.openProject.ProjectsDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_openproject"/>
+    </bean>
+
+
+    <bean id="userOpenProjectService" class="com.app.service.openProject.UserOpenProjectServiceImpl">
+        <property name="usersOpenProjectDAO" ref="UserOpenProjectDAO"></property>
+    </bean>
+
+    <bean id="workPackagesService" class="com.app.service.openProject.WorkPackagesServiceImpl">
+        <property name="workPackagesDAO" ref="WorkPackagesDAO"></property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager_openproject"/>
+
+    <bean id="transactionManager_openproject" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4_openproject"/>
+    </bean>
+
+
+    <!--end connection-->
+
+    <!--database connection for epa-->
+
+    <bean id="epa" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/epa"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="hibernate4_epa"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="epa"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.app.model.epa.Sprint</value>
+                <value>com.app.model.epa.PersonalTraits</value>
+                <value>com.app.model.epa.IndividualScoreWeight</value>
+                <value>com.app.model.epa.ProjectScores</value>
+                <value>com.app.model.epa.IndividualScores</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="SprintDAO" class="com.app.dao.epa.SprintDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_epa"/>
+    </bean>
+
+    <bean id="sprintService" class="com.app.service.epa.SprintServiceImpl">
+        <property name="sprintDAO" ref="SprintDAO"></property>
+    </bean>
+
+    <bean id="personalTraitsDAO" class="com.app.dao.epa.PersonalTraitsDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_epa"/>
+    </bean>
+
+    <bean id="personalTraits" class="com.app.service.epa.PersonalTraitsServiceImpl">
+        <property name="personalTraits" ref="personalTraitsDAO"></property>
+    </bean>
+
+    <bean id="IndividualScore" class="com.app.dao.epa.IndividualScoreWeightDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_epa"/>
+    </bean>
+
+    <bean id="indi" class="com.app.service.epa.IndiScoreWeightService">
+        <property name="individualScoreWeightDAO" ref="IndividualScore"></property>
+    </bean>
+
+    <bean id="IndividualScoreDAO" class="com.app.dao.epa.IndividualScoreDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_epa"/>
+    </bean>
+
+    <bean id="indiScore" class="com.app.service.epa.IndividualScoreServiceImpl">
+        <property name="individualScoreDAO" ref="IndividualScoreDAO"></property>
+    </bean>
+
+    <bean id="ProjectScoreDAO" class="com.app.dao.epa.ProjectScoresDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_epa"/>
+    </bean>
+
+    <bean id="proScore" class="com.app.service.epa.ProjectScoreServiceImpl">
+        <property name="projectScoresDAO" ref="ProjectScoreDAO"></property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager_epa"/>
+
+    <bean id="transactionManager_epa" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4_epa"/>
+    </bean>
+    <!--end connection-->
+
+
+    <!--database connection for Sonar-->
+
+    <bean id="sonar" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/sonar"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="hibernate4_sonar"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="sonar"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.app.model.sonar.Issues</value>
+                <value>com.app.model.sonar.Project</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="IssuesDAO" class="com.app.dao.sonar.IssuesDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_sonar"/>
+    </bean>
+
+    <bean id="ProjectDAO" class="com.app.dao.sonar.ProjectDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_sonar"/>
+    </bean>
+
+    <bean id="issuesService" class="com.app.service.sonar.IssuesServiceImpl">
+        <property name="issuesDAO" ref="IssuesDAO"></property>
+    </bean>
+
+    <bean id="projectService" class="com.app.service.sonar.ProjectServiceImpl">
+        <property name="projectsDAO" ref="ProjectDAO"></property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager_sonar"/>
+
+    <bean id="transactionManager_sonar" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4_sonar"/>
+    </bean>
+    <!--end connection-->
+
+
+    <!--database connection for time_clock-->
+
+    <bean id="time_clock" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/duplicate_time_clock"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="hibernate4_time_clock"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="time_clock"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.app.model.time_clock.Info</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="InfoDAO" class="com.app.dao.time_clock.InfoDAOImpl">
+        <property name="sessionFactory" ref="hibernate4_time_clock"/>
+    </bean>
+
+    <bean id="infoService" class="com.app.service.time_clock.InfoServiceImpl">
+        <property name="infoDAO" ref="InfoDAO"></property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager_time_clock"/>
+
+    <bean id="transactionManager_time_clock" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4_time_clock"/>
+    </bean>
+    <!--end connection-->
+
+
+    <!-- scheduler-->
+    <bean id="queryProcessor" class="com.app.SchedularUtils.QueryProcessor"/>
+
+    <bean name="queryScheduler" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.app.SchedularUtils.QueryScheduler"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="queryProcessor" value-ref="queryProcessor"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="queryScheduler"/>
+        <property name="cronExpression" value="0/30 * * * * ?"/>
+    </bean>
+
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- scheduler end-->
+
+
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:annotation-driven/>
+</beans>

@@ -51,7 +51,6 @@ public class BaseController {
     SprintServiceImpl sprintService;
 
     @Autowired
-    @Qualifier(value = "personalTraitsServiceImpl")
     PersonalTraitsServiceImpl personalTraitsServiceImpl;
 
     @Autowired
@@ -83,11 +82,11 @@ public class BaseController {
     @RequestMapping(value = "/configuration", method = RequestMethod.GET)
     public String goToLoginPage(ModelMap model) {
         model.addAttribute("users", userOpenProjectService.listUsers());
-//        scoreHandler.scheduleScoreHandlers();
-        double a= projectTeamDefectCount.getCriteriaScore(1);
-        double b = projectTeamDefectCount.getCriteriaScore(3);
+        scoreHandler.scheduleScoreHandlers();
+//        double a= projectTeamDefectCount.getCriteriaScore(1);
+//        double b = projectTeamDefectCount.getCriteriaScore(3);
 
-        List sco = individualScoreService.getLatestTopScores(7,5);
+//        List sco = individualScoreService.getLatestTopScores(7,5);
         return "adminConfiguration";
     }
 

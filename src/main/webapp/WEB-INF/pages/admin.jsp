@@ -79,7 +79,16 @@
                         <form id="duration_form">
                             <h7 class="list-group-item-heading">Sprint duration (in days) :</h7> <span>
                             <input type="number" id="sprint_interval"></span>
-                            <span><button id="setDuration">Update</button></span>
+                            <br>
+
+                            <div style="padding-top: 6px;">
+                                <h7 class="list-group-item-heading">Start Date and time :</h7> <span>
+                            <input type="datetime-local" name="date" id="startDate"
+                                   value="2017-01-01T00:00:00"></span>
+                            </div>
+                            <div style="padding-top: 6px;">
+                                <span><button id="setDuration">Update</button></span>
+                            </div>
                         </form>
                         <div id="error" hidden>
                             <P style="color: red"> Insert a valid number</P>
@@ -207,6 +216,9 @@
     $('#setDuration').click(function (e) {
         e.preventDefault();
         var value = $('#sprint_interval').val();
+        var date = document.getElementById("startDate");
+        var currentDate = date.value;
+        var formattedDate = new Date(currentDate.replace('T', ' '));
         if (!value.isEmpty && value > 0) {
 
             $('#error').hide();
@@ -215,6 +227,7 @@
 
             var search = {};
             search["duration"] = $('#sprint_interval').val();
+            search["startDate"] = formattedDate;
 
             $.ajax({
                 type: "POST",

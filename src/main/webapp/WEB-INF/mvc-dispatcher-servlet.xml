@@ -254,34 +254,9 @@
     </bean>
     <!--end connection-->
 
-
-    <!-- scheduler-->
-    <bean id="queryProcessor" class="com.app.SchedularUtils.QueryProcessor"/>
-
-    <bean name="queryScheduler" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="com.app.SchedularUtils.QueryScheduler"/>
-        <property name="jobDataAsMap">
-            <map>
-                <entry key="queryProcessor" value-ref="queryProcessor"/>
-            </map>
-        </property>
+    <!-- scheduler beans-->
+    <bean id="threadPoolTaskScheduler" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler" scope="singleton">
     </bean>
-
-    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail" ref="queryScheduler"/>
-        <property name="cronExpression" value="0/30 * * * * ?"/>
-    </bean>
-
-    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="cronTrigger"/>
-            </list>
-        </property>
-    </bean>
-
-    <!-- scheduler end-->
-
 
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:annotation-driven/>
